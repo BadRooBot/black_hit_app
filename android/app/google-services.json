@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "456114151431",
+    "firebase_url": "https://one-piece-b44fe-default-rtdb.firebaseio.com",
+    "project_id": "one-piece-b44fe",
+    "storage_bucket": "one-piece-b44fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456114151431:android:bd3a6ca9b73cb1fb23caa2",
+        "android_client_info": {
+          "package_name": "com.roobot.onepiecee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "456114151431-88cfbl07ikqun5rg7ibi0fae4jat1ro9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.roobot.onepiecee",
+            "certificate_hash": "b7c1ea61f70ee712d98ea533e9ac16d466cb3969"
+          }
+        },
+        {
+          "client_id": "456114151431-7tsl9p1ksbo4umq2n2t7n1tbo123ivhp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBei9mr7XbKM231S18pe55l812K1dC4kV8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456114151431-7tsl9p1ksbo4umq2n2t7n1tbo123ivhp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "456114151431-eft6tav6ibcns8d5288coll45cv4plfd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.roobot.onepiecee"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
