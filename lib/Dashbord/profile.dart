@@ -1,9 +1,4 @@
-import 'dart:typed_data';
-import 'package:AliStore/resources/realtime_database_methods.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
+/*import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart'as image;
 import 'package:AliStore/Dashbord/home.dart';
@@ -471,3 +466,4 @@ Column buildStatColumn(int num, String label) {
 
 
 
+*/

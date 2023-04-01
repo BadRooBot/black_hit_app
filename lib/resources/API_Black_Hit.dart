@@ -21,6 +21,49 @@ Future<void> makeChatListTableAndAddIdToList(
     throw Exception('Failed to make chat list table and add id to list');
   }
 }
+
+
+
+
+
+
+
+
+import 'mesho.dart';
+
+class to_use {
+  how_to_login(email, password) {
+    var login = API.login(email, password);
+    print(login.toString());
+  }
+
+  how_to_singUp(username, image_url, gender, points, email, password) async {
+    var login =
+        await API.signup(username, password, email, image_url, gender, points);
+    print(login['id']);
+
+    return login['id'];
+  }
+
+  how_to_get_one_user(id) async {
+    var login = await API().getOneUser("d7a0cb10-d9dd-4f5e-a616-d629db6f55c3");
+    print(login['username']);
+
+    return login['username'];
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 */
 // Function to delete a chat from the user's chat list
 Future<void> deleteList(String chatId) async {
@@ -123,7 +166,7 @@ class API {
     }
   }
 
-  Future<Map<String, dynamic>> getOneUser(int userId) async {
+  Future<Map<String, dynamic>> getOneUser(userId) async {
     final response = await http.post(
       Uri.parse('$baseURL/get-one-user'),
       body: jsonEncode({'user_id': "$userId"}),
@@ -337,6 +380,85 @@ class API {
       return false;
     }
   }
+
+  Future<List<Message>> getMessages(String chatId, String to) async {
+    final response = await http.post(
+      Uri.parse('$baseURL/get-message'),
+      body: jsonEncode({
+        'chat_id': "$chatId",
+        'to': '$to',
+      }),
+      headers: {'Content-Type': 'application/json'},
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      List<dynamic> messagesJson = jsonDecode(response.body);
+      List<Message> messages =
+          messagesJson.map((json) => Message.fromJson(json)).toList();
+      return messages;
+    } else {
+      throw Exception('Failed to load messages');
+    }
+  }
+
+  Future<void> sendMessage(String userId, String to, String from,
+      String message, String imageUrl, String videoUrl, DateTime time) async {
+    final response = await http.post(
+      Uri.parse('$baseURL/send-message'),
+      body: jsonEncode({
+        'user_id': userId,
+        'to': to,
+        'from': from,
+        'message': message,
+        'image_url': imageUrl,
+        'video_url': videoUrl,
+        'time': time.toIso8601String(),
+      }),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      // Success
+    } else {
+      throw Exception('Failed to send message');
+    }
+  }
+
+  Future<void> updateMessageIsSeen(
+      String userId, bool isSeen, int messageId) async {
+    final response = await http.post(
+      Uri.parse('$baseURL/update_message_is_seen'),
+      body: jsonEncode({
+        'user_id': userId,
+        'is_seen': isSeen,
+        'messageID': messageId,
+      }),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      // Success
+    } else {
+      throw Exception('Failed to update message isSeen');
+    }
+  }
+
+  Future<void> deleteMessage(String chatId, int messageId) async {
+    final response = await http.post(
+      Uri.parse('$baseURL/delete-message '),
+      body: jsonEncode({
+        'chat_id': chatId,
+        'messageID': messageId,
+      }),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      // Success
+    } else {
+      throw Exception('Failed to delete message');
+    }
+  }
 }
 ///////////////////////////////////////////////////////////////3
 
@@ -372,84 +494,5 @@ class Message {
       isSeen: json['is_seen'],
       messageId: json['message_id'],
     );
-  }
-}
-
-Future<List<Message>> getMessages(String chatId, String to) async {
-  final response = await http.post(
-    Uri.parse('$baseURL/get-message'),
-    body: jsonEncode({
-      'chat_id': "$chatId",
-      'to': '$to',
-    }),
-    headers: {'Content-Type': 'application/json'},
-  );
-  print(response.body);
-  if (response.statusCode == 200) {
-    List<dynamic> messagesJson = jsonDecode(response.body);
-    List<Message> messages =
-        messagesJson.map((json) => Message.fromJson(json)).toList();
-    return messages;
-  } else {
-    throw Exception('Failed to load messages');
-  }
-}
-
-Future<void> sendMessage(String userId, String to, String from, String message,
-    String imageUrl, String videoUrl, DateTime time) async {
-  final response = await http.post(
-    Uri.parse('$baseURL/send-message'),
-    body: jsonEncode({
-      'user_id': userId,
-      'to': to,
-      'from': from,
-      'message': message,
-      'image_url': imageUrl,
-      'video_url': videoUrl,
-      'time': time.toIso8601String(),
-    }),
-    headers: {'Content-Type': 'application/json'},
-  );
-
-  if (response.statusCode == 200) {
-    // Success
-  } else {
-    throw Exception('Failed to send message');
-  }
-}
-
-Future<void> updateMessageIsSeen(
-    String userId, bool isSeen, int messageId) async {
-  final response = await http.post(
-    Uri.parse('$baseURL/update_message_is_seen'),
-    body: jsonEncode({
-      'user_id': userId,
-      'is_seen': isSeen,
-      'messageID': messageId,
-    }),
-    headers: {'Content-Type': 'application/json'},
-  );
-
-  if (response.statusCode == 200) {
-    // Success
-  } else {
-    throw Exception('Failed to update message isSeen');
-  }
-}
-
-Future<void> deleteMessage(String chatId, int messageId) async {
-  final response = await http.post(
-    Uri.parse('$baseURL/delete-message '),
-    body: jsonEncode({
-      'chat_id': chatId,
-      'messageID': messageId,
-    }),
-    headers: {'Content-Type': 'application/json'},
-  );
-
-  if (response.statusCode == 200) {
-    // Success
-  } else {
-    throw Exception('Failed to delete message');
   }
 }
