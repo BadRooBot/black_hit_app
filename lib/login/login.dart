@@ -9,6 +9,8 @@ import 'package:AliStore/resources/Localizations_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../resources/API_BLACK_Hit.dart';
 
+late var myInfoList;
+
 class NewLogin extends StatefulWidget {
   const NewLogin({Key? key}) : super(key: key);
 
@@ -22,30 +24,30 @@ class _NewLoginState extends State<NewLogin> {
   GlobalKey<FormState> formstate = new GlobalKey<FormState>();
 
   getMyData(id) async {
-    // if (UserInfoList.isEmpty) {
+    // if (myInfoList.isEmpty) {
     // List _val=await realtimeDb().GetOneUserData(Id: "${FirebaseAuth.instance.currentUser!.uid}");
     SharedPreferences _preferences = await SharedPreferences.getInstance();
 
     var _val = await API().getOneUser(id);
     setState(() {
-      //  UserInfoList = _val;
+      myInfoList = _val;
     });
     /* var Usersinof =
      await userinfoRef.where("uID", isEqualTo: "${FirebaseAuth.instance.currentUser!.uid}").get();
      Usersinof.docs.forEach((element) {
        setState(() {
-         UserInfoList.add(element.data());
+         myInfoList.add(element.data());
        });
      });*/
     // }
-    // if ((UserInfoList[0]['username'] == "OneLand User") ||
-    //     UserInfoList[0]['username'] == null) {
-    //   Navigator.pushNamed(
-    //     context,
-    //     '/getUserInfo',
-    //     arguments: {'id': id},
-    //   );
-    // }
+    if ((myInfoList[0]['username'] == "OneLand User") ||
+        myInfoList[0]['username'] == null) {
+      Navigator.pushNamed(
+        context,
+        '/getUserInfo',
+        arguments: {'id': id},
+      );
+    }
   }
 
   signIn() async {

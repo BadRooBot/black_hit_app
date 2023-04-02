@@ -110,8 +110,8 @@ class _AllUserState extends State<AllUser> {
                   //     Uid: "${AllUsersListInfo[i]["uID"]}",
                   //     isGroup: false,
                   //     VIP: AllUsersListInfo[i]["VIP"],
-                  //  / ),
-                  /// ));
+                  //   ),
+                  // ));
                 },
                 splashColor: Colors.blueAccent,
                 borderRadius: BorderRadius.circular(15),
@@ -205,12 +205,12 @@ class _AllUserState extends State<AllUser> {
                           child: InkWell(
                               splashColor: Colors.blueGrey,
                               onTap: () {
-                                // Navigator.of(context).push(MaterialPageRoute(
-                                //   builder: (context) => profile(
-                                //     uid: "${AllUsersListInfo[i]["uID"]}",
-                                //     VIP: AllUsersListInfo[i]["VIP"],
-                                //   ),
-                                // ));
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => profile(
+                                      uid: "${AllUsersListInfo[i]["id"]}",
+                                      VIP: false //AllUsersListInfo[i]["VIP"],
+                                      ),
+                                ));
                               },
                               child: Icon(
                                 Icons.info_outline_rounded,

@@ -192,7 +192,7 @@ class API {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
-      throw Exception('Failed to load users');
+      throw Exception('Failed to load users ${response.body}');
     }
   }
 
@@ -316,7 +316,7 @@ class API {
     }
   }
 
-  Future<List<dynamic>> getMyPosts(String userId) async {
+  Future<List<dynamic>> getMyPosts(userId) async {
     final url = Uri.parse('$baseURL/get-my-posts');
     final response = await http.post(
       url,
