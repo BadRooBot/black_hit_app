@@ -101,8 +101,8 @@ class _AllUserState extends State<AllUser> {
                   //     Uid: "${AllUsersListInfo[i]["uID"]}",
                   //     isGroup: false,
                   //     VIP: AllUsersListInfo[i]["VIP"],
-                  //   ),
-                  // ));
+                  //  / ),
+                  /// ));
                 },
                 splashColor: Colors.blueAccent,
                 borderRadius: BorderRadius.circular(15),
