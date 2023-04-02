@@ -1,4 +1,5 @@
 import 'package:AliStore/Ads/AdManager.dart';
+import 'package:AliStore/Dashbord/test_file.dart';
 import 'package:AliStore/blog/AddNewBlog.dart';
 import 'package:AliStore/blog/blogpage.dart';
 import 'package:AliStore/downloadPage/DownloadPage.dart';
@@ -16,6 +17,7 @@ import 'package:AliStore/resources/Localizations_constants.dart';
 import 'package:AliStore/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unity_ads_plugin/unity_ads_plugin.dart';
+import 'Dashbord/error_page.dart';
 import 'blog/blogSearch.dart';
 import 'login/getUserInfo.dart';
 import 'login/login.dart';
@@ -68,49 +70,55 @@ class _MyAppState extends State<MyApp> {
     LocalJsonLocalization.delegate.directories = ['lib/i18n'];
 
     return MaterialApp(
-        title: 'One Land',
-        debugShowCheckedModeBanner: false,
-        theme: lightThemeData(context).copyWith(
-            appBarTheme:
-                const AppBarTheme(color: Color(0xFF508098)), //0xFF154c79
-            scaffoldBackgroundColor: MyBadyColor,
-            cardColor: MyBadyColor //const Color(0xFFDAD8D9)
-            ),
-        darkTheme: darkThemeData(context).copyWith(
-            appBarTheme: const AppBarTheme(color: Color(0xFF253341)),
-            scaffoldBackgroundColor: MyBadyColorDark,
-            cardColor: MyBadyColorDark),
-        supportedLocales: [Locale("en", ""), Locale("ar", "")],
-        localizationsDelegates: [
-          DemoLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        locale: _locale != null ? _locale : Locale("en"),
-        localeResolutionCallback: (deviceLocals, supportedLocals) {
-          for (var local in supportedLocals) {
-            if (local.languageCode == deviceLocals!.languageCode) {
-              return deviceLocals;
-            }
+      title: 'One Land',
+      debugShowCheckedModeBanner: false,
+      theme: lightThemeData(context).copyWith(
+          appBarTheme: const AppBarTheme(color: Color(0xFF508098)), //0xFF154c79
+          scaffoldBackgroundColor: MyBadyColor,
+          cardColor: MyBadyColor //const Color(0xFFDAD8D9)
+          ),
+      darkTheme: darkThemeData(context).copyWith(
+          appBarTheme: const AppBarTheme(color: Color(0xFF253341)),
+          scaffoldBackgroundColor: MyBadyColorDark,
+          cardColor: MyBadyColorDark),
+      supportedLocales: [Locale("en", ""), Locale("ar", "")],
+      localizationsDelegates: [
+        DemoLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      locale: _locale != null ? _locale : Locale("en"),
+      localeResolutionCallback: (deviceLocals, supportedLocals) {
+        for (var local in supportedLocals) {
+          if (local.languageCode == deviceLocals!.languageCode) {
+            return deviceLocals;
           }
-          return supportedLocals.first;
-        },
-        home: const FirstScreen(),
-        routes: {
-          "login": (context) => const NewLogin(),
-          "signup": (context) => const singup(),
-          // "home": (context) => const home(),
-          "getUserInfo": (context) => const getUserInfo(),
-          // "addNewGroup": (context) => const addNewGroup(),
-          //  "AddPostScreen": (context) => const AddPostScreen(),
-          // "AddItemToShop": (context) => const AddItemToShop(),
-          "downloadPage": (context) => const DownloadPage(),
-          "AllUser": (context) => const AllUser(),
-          // "blogpage": (context) => const blogpage(),
-          // "AddNewBlog": (context) => const AddNewBlog(),
-          // "blogSearch": (context) => const blogSearch(),
-        });
+        }
+        return supportedLocals.first;
+      },
+      home: const FirstScreen(),
+      routes: {
+        "/login": (context) => const NewLogin(),
+        "/signup": (context) => const singup(),
+        // "home": (context) => const home(),
+        "/getUserInfo": (context) => const getUserInfo(),
+        // "addNewGroup": (context) => const addNewGroup(),
+        //  "AddPostScreen": (context) => const AddPostScreen(),
+        // "AddItemToShop": (context) => const AddItemToShop(),
+        "/downloadPage": (context) => const DownloadPage(),
+        "/AllUser": (context) => const AllUser(),
+        "/test": (context) => test_file(),
+        // "blogpage": (context) => const blogpage(),
+        // "AddNewBlog": (context) => const AddNewBlog(),
+        // "blogSearch": (context) => const blogSearch(),
+      },
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(
+          builder: (context) => ErrorPage(),
+        );
+      },
+    );
   }
 }
 

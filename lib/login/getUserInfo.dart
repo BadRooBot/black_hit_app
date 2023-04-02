@@ -17,7 +17,7 @@ class getUserInfo extends StatefulWidget {
 }
 
 class _getUserInfoState extends State<getUserInfo> {
-  var email;
+  var email = "  s";
   var passwor;
   late File file;
   var imageurl;
@@ -47,12 +47,16 @@ class _getUserInfoState extends State<getUserInfo> {
         "status": passwor,
         "imageProFile": imageurl}
         ,SetOptions(merge: true),);*/
-      final Map<String, String> args =
-          ModalRoute.of(context)?.settings.arguments as Map<String, String>;
+      final Map<String, dynamic> args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
       var id = args['id'];
-      await API().updateUserUsername(id, email);
-
-      Navigator.pushNamed(context, "home");
+      await API()
+          .updateUserUsername(id, email)
+          .whenComplete(() => Navigator.pushNamed(
+                context,
+                "/test",
+                arguments: {'id': id},
+              ));
     }
   }
 
@@ -127,7 +131,7 @@ class _getUserInfoState extends State<getUserInfo> {
                     return null;
                   },
                   onSaved: (val) {
-                    email = val;
+                    email = val!;
                   },
                   decoration: InputDecoration(
                       hintText: "$Typeyourname",

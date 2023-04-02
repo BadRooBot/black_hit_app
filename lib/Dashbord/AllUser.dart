@@ -33,6 +33,7 @@ class _AllUserState extends State<AllUser> {
       _val = await API().getAllUsers(); //realDb.GetAllUserData(Limite: lu);
       setState(() {
         AllUsersListInfo = _val;
+        print(_val);
       });
       /*  var inof2 = await userinfoRef.orderBy("uID").limit(lu).get();
      inof2.docs.forEach((element) {
@@ -45,6 +46,7 @@ class _AllUserState extends State<AllUser> {
       _val = await API().getAllUsers(); // realDb.GetAllUserData(Limite: lu);
       setState(() {
         AllUsersListInfo = _val;
+        print(_val);
       });
       /* var inof = await userinfoRef.orderBy("uID").startAt([AllUsersListInfo[AllUsersListInfo.length-1]["uID"]]).limit(lu).get();
      inof.docs.forEach((element) {
