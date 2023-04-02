@@ -206,7 +206,7 @@ class _singupState extends State<singup> {
                             style: TextStyle(color: Colors.grey, fontSize: 14),
                           ),
                           onTap: () {
-                            Navigator.pushNamed(context, "login");
+                            Navigator.pushNamed(context, "/login");
                           },
                         ))
                   ],

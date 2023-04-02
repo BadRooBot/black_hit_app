@@ -202,7 +202,7 @@ class API {
     var response = await http.post(
       url,
       body: jsonEncode({
-        'user_id': userId.toString(),
+        'user_id': userId,
         'new_username': newUsername,
       }),
       headers: {'Content-Type': 'application/json'},

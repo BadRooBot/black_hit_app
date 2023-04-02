@@ -240,7 +240,8 @@ class _NewLoginState extends State<NewLogin> {
                           SharedPreferences _preferences =
                               await SharedPreferences.getInstance();
                           _preferences.setBool("NewUSer", true);
-                          Navigator.of(context).pushReplacementNamed("AllUser");
+                          Navigator.of(context)
+                              .pushReplacementNamed("/AllUser");
                         }
                       },
                       child: Text("Login",

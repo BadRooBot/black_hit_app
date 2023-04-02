@@ -32,7 +32,11 @@ class _AllUserState extends State<AllUser> {
     if (IsFirstTime2) {
       _val = await API().getAllUsers(); //realDb.GetAllUserData(Limite: lu);
       setState(() {
-        AllUsersListInfo = _val;
+        _val.forEach((element) {
+          AllUsersListInfo.add(element);
+        });
+        print(AllUsersListInfo.length);
+        print(AllUsersListInfo[0]);
       });
       /*  var inof2 = await userinfoRef.orderBy("uID").limit(lu).get();
      inof2.docs.forEach((element) {
@@ -42,9 +46,14 @@ class _AllUserState extends State<AllUser> {
      });
      */
     } else {
-      _val = await API().getAllUsers(); // realDb.GetAllUserData(Limite: lu);
+      List _val =
+          await API().getAllUsers(); // realDb.GetAllUserData(Limite: lu);
       setState(() {
-        AllUsersListInfo = _val;
+        _val.forEach((element) {
+          AllUsersListInfo.add(element);
+        });
+        print(AllUsersListInfo[0]);
+        print(AllUsersListInfo.length);
       });
       /* var inof = await userinfoRef.orderBy("uID").startAt([AllUsersListInfo[AllUsersListInfo.length-1]["uID"]]).limit(lu).get();
      inof.docs.forEach((element) {
@@ -118,14 +127,15 @@ class _AllUserState extends State<AllUser> {
                       children: [
                         Stack(
                           children: [
-                            AllUsersListInfo[i]["VIP"]
+                            // AllUsersListInfo[i]["VIP"]
+                            false
                                 ? ClipRRect(
                                     borderRadius: BorderRadius.circular(25),
                                     child: Container(
                                       width: 46,
                                       height: 46,
                                       child: HtmlWidget(
-                                        '<img width="46" height="46" src="${AllUsersListInfo[i]["imageProFile"]}" '
+                                        '<img width="46" height="46" src="${AllUsersListInfo[i]["image_url"]}" '
                                         '/>',
                                         factoryBuilder: () => MyWidgetFactory(),
                                         enableCaching: true,
@@ -135,7 +145,7 @@ class _AllUserState extends State<AllUser> {
                                 : CircleAvatar(
                                     backgroundImage: AssetImage(img),
                                     child: Text(
-                                      "${AllUsersListInfo[i]["name"].toString().substring(0, 1).toUpperCase()}",
+                                      "${AllUsersListInfo[i]["username"].toString().substring(0, 1).toUpperCase()}",
                                       style: TextStyle(
                                           fontSize: 24,
                                           fontWeight: FontWeight.bold),
@@ -173,7 +183,7 @@ class _AllUserState extends State<AllUser> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "${AllUsersListInfo[i]["name"]}",
+                                "${AllUsersListInfo[i]["username"]}",
                                 maxLines: 1,
                                 style: TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.w500),
@@ -182,7 +192,7 @@ class _AllUserState extends State<AllUser> {
                               Opacity(
                                 opacity: 0.60,
                                 child: Text(
-                                  "${AllUsersListInfo[i]["status"]}",
+                                  "${AllUsersListInfo[i]["gender"]}",
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
